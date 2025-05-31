@@ -16,7 +16,7 @@ This project builds a question-answering system using 10-K filings from top tech
 ```
 finance-llm-sec-qna/
 ├── notebooks/               # Colab notebooks for data extraction and CPU conversion
-├── faiss_index/             # Precomputed FAISS index files
+├── faiss_index/             # (Optional) Folder to hold downloaded FAISS index
 ├── app/                     # Streamlit app with RAG + chart rendering
 ├── requirements.txt         # Python dependencies
 └── README.md
@@ -25,11 +25,18 @@ finance-llm-sec-qna/
 ## 🚀 Quickstart
 
 1. Run `notebooks/SEC_Tech10_Extractor.ipynb` in Google Colab to build FAISS index
-2. Save the index to `faiss_index/tech10_faiss_index_cpu.pkl`
-3. Deploy `app/streamlit_app.py` using:
+2. Upload your FAISS index to Google Drive (or use the one shared below)
+3. Launch the Streamlit app:
    ```bash
    streamlit run app/streamlit_app.py
    ```
+   The app will auto-download the FAISS index if not found locally using the provided public Drive link.
+
+## 📦 FAISS Index Link
+
+[Download tech10_faiss_index_cpu.pkl](https://drive.google.com/file/d/1ckak8qZYSKKUZu9Fq_Trp7qo692WOmJu/view?usp=sharing)
+
+Make sure to update the file ID in the `streamlit_app.py` if you replace the index.
 
 ## 🧠 Example Questions
 
