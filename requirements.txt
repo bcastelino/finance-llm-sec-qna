@@ -1,10 +1,9 @@
-
+streamlit
+transformers
 sec-api
 sentence-transformers
 faiss-cpu
 langchain
-streamlit
-transformers
 langchain-community
 gdown
 matplotlib
