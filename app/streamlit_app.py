@@ -7,8 +7,8 @@ from langchain.vectorstores import FAISS
 from transformers import pipeline
 
 # File setup
-FAISS_PATH = "tech10_faiss_index.pkl"
-FILE_ID = "16bn_7iXySmif_Skn15gdnuZ07HVUp1xm"
+FAISS_PATH = "tech10_faiss_index_cpu.pkl"
+FILE_ID = "1ckak8qZYSKKUZu9Fq_Trp7qo692WOmJu"                      #GPU Link: "16bn_7iXySmif_Skn15gdnuZ07HVUp1xm"
 URL = f"https://drive.google.com/uc?id={FILE_ID}"
 
 # Download FAISS index if it doesn't exist
