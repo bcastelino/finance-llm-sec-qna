@@ -1,0 +1,7 @@
+
+sec-api
+sentence-transformers
+faiss-cpu
+langchain
+streamlit
+transformers
