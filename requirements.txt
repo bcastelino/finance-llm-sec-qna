@@ -1,6 +1,6 @@
 streamlit
 transformers==4.40.1
-torch==2.3.0
+torch==2.7.0
 langchain==0.1.16
 sec-api
 sentence-transformers
