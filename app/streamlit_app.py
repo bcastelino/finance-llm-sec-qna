@@ -6,24 +6,22 @@ import torch
 import re
 import io
 import pickle
-import gdown
-import os
 from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain.chains import RetrievalQA
 from langchain_community.llms import HuggingFacePipeline
+import gdown
+import os
 
 st.set_page_config(page_title="📊 Finance RAG Chat & Charts", layout="wide")
 st.title("💬 Ask a Financial Question | 📈 See the Chart")
 
-# Download FAISS index from Google Drive if not present
+# Download FAISS index if not exists
 FAISS_PATH = "faiss_index/tech10_faiss_index_cpu.pkl"
-FAISS_URL = "https://drive.google.com/uc?id=1ckak8qZYSKKUZu9Fq_Trp7qo692WOmJu"
-os.makedirs("faiss_index", exist_ok=True)
-
+gdown_id = "1ckak8qZYSKKUZu9Fq_Trp7qo692WOmJu"
 if not os.path.exists(FAISS_PATH):
-    with st.spinner("📥 Downloading FAISS index from Google Drive..."):
-        gdown.download(FAISS_URL, FAISS_PATH, quiet=False)
+    st.info("Downloading FAISS index from Google Drive...")
+    gdown.download(f"https://drive.google.com/uc?id={gdown_id}", FAISS_PATH, quiet=False)
 
 # Load FAISS index
 def load_faiss():
@@ -33,10 +31,10 @@ def load_faiss():
 db = load_faiss()
 retriever = db.as_retriever()
 
-# Load CPU-safe Hugging Face model
+# Load Hugging Face model (Phi-2 or other lightweight model)
 @st.cache_resource
 def load_model():
-    model_id = "sshleifer/tiny-gpt2"
+    model_id = "microsoft/phi-2"
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     model = AutoModelForCausalLM.from_pretrained(model_id)
     pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens=300)
@@ -64,18 +62,21 @@ def extract_and_run_code(text):
     return False
 
 if st.button("Submit") and user_input:
-    with st.spinner("🤖 Processing with RAG + LLM..."):
+    with st.spinner("Processing with RAG + LLM..."):
         result = qa_chain(user_input)
         response = result["result"]
 
+    # Show LLM answer
     st.markdown("### 🧠 Answer")
     st.code(response)
 
+    # Attempt to run and display chart
     st.markdown("### 📈 Visualization Output")
     success = extract_and_run_code(response)
     if not success:
         st.info("No valid chart code detected or chart execution failed.")
 
+    # Optional: Show source docs
     with st.expander("📄 Source Documents"):
         for doc in result["source_documents"]:
             st.markdown(doc.page_content[:500] + "...")
