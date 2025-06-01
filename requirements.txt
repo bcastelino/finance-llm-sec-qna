@@ -1,4 +1,8 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+
 streamlit
+transformers==4.37.2
+torch==2.0.1+cpu
 transformers
 sec-api
 sentence-transformers
