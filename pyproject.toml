@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=42", "wheel", "pip>=23.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "finance-llm-sec-qna"
+version = "0.1.0"
+description = "Q&A app using SEC filings and LLMs"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+dependencies = []
+
+[tool.setuptools]
+packages = ["app"]
