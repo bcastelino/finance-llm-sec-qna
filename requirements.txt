@@ -1,9 +1,10 @@
 streamlit==1.45.1
 transformers==4.37.2
-torch==2.2.1
-sentence-transformers==2.6.1
-faiss-cpu==1.7.4
-langchain==0.1.14
+torch==2.0.1+cpu
+--extra-index-url https://download.pytorch.org/whl/cpu
+faiss-cpu
+sentence-transformers
+langchain==0.1.16
 langchain-community==0.0.21
-matplotlib==3.8.2
-gdown==5.2.0
+gdown
+python-dotenv
