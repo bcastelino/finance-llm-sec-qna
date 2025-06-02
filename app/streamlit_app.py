@@ -18,12 +18,13 @@ st.title("💬 Ask a Financial Question | 📈 See the Chart")
 
 # Download FAISS index if not exists
 FAISS_PATH = "faiss_index/tech10_faiss_index_cpu.pkl"
-gdown_id = "1ckak8qZYSKKUZu9Fq_Trp7qo692WOmJu"
+gdown_id = "1SqDMIz4X30FidnBpEKPBSmmZwBXDUxt0"
 if not os.path.exists(FAISS_PATH):
     st.info("Downloading FAISS index from Google Drive...")
     gdown.download(f"https://drive.google.com/uc?id={gdown_id}", FAISS_PATH, quiet=False)
 
 # Load FAISS index
+@st.cache_resource
 def load_faiss():
     with open(FAISS_PATH, "rb") as f:
         return pickle.load(f)
